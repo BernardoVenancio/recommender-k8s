@@ -1,7 +1,7 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: ml-trainer-job-v2
+  name: ml-trainer-job-v1
 spec:
   template:
     spec:
@@ -11,7 +11,7 @@ spec:
         imagePullPolicy: Always
         env:
         - name: DATASET_PATH
-          value: "/datasets/2023_spotify_ds2.csv"
+          value: "/datasets/2023_spotify_ds1.csv"
         volumeMounts:
         # Salvar o modelo
         - name: model-storage
