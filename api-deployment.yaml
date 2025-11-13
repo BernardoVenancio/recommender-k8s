@@ -15,7 +15,7 @@ spec:
       containers:
       - name: api-container
         # Link do DockerHub
-        image: bernardovenancio/recommender-api:0.1
+        image: bernardovenancio/recommender-api:0.2
         imagePullPolicy: Always
         ports:
         - containerPort: 50002 # Porta disponibilizada
