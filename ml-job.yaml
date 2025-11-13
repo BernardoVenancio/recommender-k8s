@@ -1,0 +1,30 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: ml-trainer-job-v1
+spec:
+  template:
+    spec:
+      containers:
+      - name: ml-trainer-container
+        image: bernardovenancio/recommender-ml:0.1
+        imagePullPolicy: Always
+        volumeMounts:
+        # Salvar o modelo
+        - name: model-storage
+          mountPath: /model_output
+        # Ler os dados
+        - name: dataset-storage
+          mountPath: /datasets
+          readOnly: true
+      volumes:
+      # HD de saída
+      - name: model-storage
+        persistentVolumeClaim:
+          claimName: bernardo-pvc
+      # HD de entrada
+      - name: dataset-storage
+        hostPath:
+          path: /home/datasets/spotify
+      restartPolicy: Never # Um Job não deve reiniciar
+  backoffLimit: 4

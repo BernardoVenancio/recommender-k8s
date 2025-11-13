@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: recommender-api-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: bernardo-recommender
+  template:
+    metadata:
+      labels:
+        app: bernardo-recommender
+    spec:
+      containers:
+      - name: api-container
+        # Link do DockerHub
+        image: bernardovenancio/recommender-api:0.1
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 50002 # Porta disponibilizada
+        volumeMounts:
+        - name: model-storage
+          mountPath: /model_output
+          readOnly: true
+      volumes:
+      - name: model-storage
+        persistentVolumeClaim:
+          claimName: bernardo-pvc
