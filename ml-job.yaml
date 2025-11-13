@@ -7,8 +7,11 @@ spec:
     spec:
       containers:
       - name: ml-trainer-container
-        image: bernardovenancio/recommender-ml:0.1
+        image: bernardovenancio/recommender-ml:0.2
         imagePullPolicy: Always
+        env:
+        - name: DATASET_PATH
+          value: "/datasets/2023_spotify_ds1.csv"
         volumeMounts:
         # Salvar o modelo
         - name: model-storage
