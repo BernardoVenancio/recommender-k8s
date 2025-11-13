@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: recommender-api-deployment
 spec:
-  replicas: 3
+  replicas: 1
   selector:
     matchLabels:
       app: bernardo-recommender
